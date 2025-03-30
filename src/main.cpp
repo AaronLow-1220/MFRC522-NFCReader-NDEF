@@ -25,10 +25,10 @@ void loop()
   if (!mfrc522.PICC_IsNewCardPresent() || !mfrc522.PICC_ReadCardSerial())
     return;
 
-  byte ndefData[144];
+  byte ndefData[144]; // Capacity for 144 bytes
   int index = 0;
 
-  for (byte i = 4; i < 39; i++)
+  for (byte i = 4; i < 39; i++) // Read from block 4 to block 39
   {
     byte buffer[18];
     byte size = sizeof(buffer);
@@ -39,7 +39,7 @@ void loop()
       return;
     }
 
-    for (byte j = 0; j < 4; j++)
+    for (byte j = 0; j < 4; j++) // Read only the first 4 bytes of each block
     {
       ndefData[index++] = buffer[j];
     }
